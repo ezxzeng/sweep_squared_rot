@@ -13,5 +13,4 @@ runs:
   entrypoint: '/bin/sh'
   args:
     - '-c'
-    - |
-      java -jar /opt/freerouting_cli.jar -de ${{ inputs.dsn_file }} -do ${{ inputs.ses_file }} -mp 100 -inc GRN
+    - java -jar /opt/freerouting_cli.jar -de ${{ inputs.dsn_file }} -do ${{ inputs.ses_file }} -mp 100 -inc GRN
