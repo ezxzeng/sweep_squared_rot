@@ -319,4 +319,11 @@ pcbs:
           left: RAW
           right: ''
           reversible: true
-      
+      jst:
+        what: jstph_reversible
+        where:
+          shift: [center_x-11, center_y-28.5]
+          rotate: 180
+        params:
+          pos: Bplus
+          neg: GND
