@@ -1,4 +1,6 @@
 # `U` is a predefined unit of measure that means 19.05mm, which is MX spacing
+meta:
+  engine: 4.0.4
 units:
   # Proxy Spacing Variables for easy changing to choc/mx
   kx: u
@@ -230,6 +232,22 @@ cases:
       name: wall
       operation: add
 pcbs:
+  top_plate:
+    outlines:
+      edge:
+        outline: pcb_outline
+        layer: Edge.Cuts
+    footprints:
+      jlc_order_number:
+        what: text
+        params:
+          text: "JLCJLCJLCJLC"
+          justify: left
+  bottom_plate:
+    outlines:
+      edge:
+        outline: pcb_outline
+        layer: Edge.Cuts
   board:
     outlines.edge:
       outline: pcb_outline
@@ -251,7 +269,7 @@ pcbs:
           choc_pth: true
           keycaps: true
       mcu:
-        what: promicro-pretty
+        what: promicro
         where:
           - shift: [center_x - 34.8, center_y - 25]
         params:
@@ -272,8 +290,6 @@ pcbs:
           P6: matrix_inner_bottom
           P8: thumb_tucky
           P9: thumb_reachy
-          P0: Switch18
-          RAW: RAW
       trrs:
         what: trrs
         where:
@@ -283,7 +299,7 @@ pcbs:
           symmetric: true
           A: GND
           B: GND
-          C: Switch18
+          C: P0
           D: VCC
       reset:
         what: reset_button
@@ -293,14 +309,6 @@ pcbs:
         params:
           from: GND
           to: RST
-      reset2:
-        what: b3u1000p
-        where:
-          shift: [center_x - 4, center_y - 26]
-          rotate: -90
-        params:
-          r1: GND
-          r2: RST
       slider:
         what: slider_threeway
         where:
@@ -311,29 +319,4 @@ pcbs:
           left: RAW
           right: ''
           reversible: true
-      jst:
-        what: jstph_reversible
-        where:
-          shift: [center_x-11, center_y-28.5]
-          rotate: 180
-        params:
-          pos: Bplus
-          neg: GND
-      mounting_hole_1:
-        what: mountinghole
-        where.shift: [mounting_1_x, mounting_1_y]
-      mounting_hole_2:
-        what: mountinghole
-        where.shift: [mounting_2_x, mounting_2_y]
-      mounting_hole_3:
-        what: mountinghole
-        where.shift: [mounting_3_x, mounting_3_y]
-      mounting_hole_4:
-        what: mountinghole
-        where.shift: [mounting_4_x, mounting_4_y]
-      mounting_hole_5:
-        what: mountinghole
-        where.shift: [mounting_5_x, mounting_5_y]
-      mounting_hole_6:
-        what: mountinghole
-        where.shift: [mounting_6_x, mounting_6_y]
+      

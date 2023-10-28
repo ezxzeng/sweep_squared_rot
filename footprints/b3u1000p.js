@@ -1,8 +1,8 @@
 module.exports = {
     params: {
+        designator: 'B',
         r1: {type: 'net', value: 'GND'},
         r2: {type: 'net', value: 'RST'},
-        class: 'S', 
 	    reverse: true
     },
     body: p => {
