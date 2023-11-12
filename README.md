@@ -36,7 +36,7 @@ A 5x3 split keyboard with 3 thumb keys.
 - 100mm x 100mm pcb for really cheap fabrication
 - reversible footprint
 - programatically generated with [ergogen](https://ergogen.cache.works/) (mostly)
-- `footprints/key_switches.js` enables deciding between combinations of MX, Choc, or gateron low profile sockets :warning: WARNING: 
+- `footprints/key_switches.js` enables deciding between combinations of MX, Choc, or gateron low profile sockets
   > [!WARNING]  
   > still mostly untested, use at your own risk
 - jst battery connector and 7-pin slider switch for battery management
