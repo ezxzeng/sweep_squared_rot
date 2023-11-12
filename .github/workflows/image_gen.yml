@@ -1,6 +1,9 @@
 on: 
   workflow_dispatch:
   workflow_call:
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  PAT: ${{ secrets.PAT }}
 
 name: Generate Images and commit them
 jobs:
@@ -12,7 +15,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        token: ${{ secrets.PAT }}
+        token: ${{ PAT }}
       - name: plot images
         uses: ./.github/actions/render
         with:
