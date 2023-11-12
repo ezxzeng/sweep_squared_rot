@@ -1,6 +1,6 @@
 on: workflow_dispatch
 
-name: Build
+name: Gerber
 jobs:
   gerber:
     runs-on: ubuntu-latest
