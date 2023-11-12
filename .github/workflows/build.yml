@@ -1,4 +1,4 @@
-on: [push, pull_request, workflow_dispatch]
+on: workflow_dispatch
 
 name: Build
 jobs:
@@ -36,7 +36,7 @@ jobs:
         if: always()
         uses: ./.github/actions/export-gerbers
         with:
-          pcb_file: routed_pcb/board.kicad_pro
+          pcb_file: output/pcbs/board.kicad_pcb
           gerbers_dir: output/gerbers/board
       - name: Persist output
         if: always()
@@ -44,20 +44,3 @@ jobs:
         with:
           name: autorouted-pcbs-and-gerbers
           path: output
-  gerber:
-    runs-on: ubuntu-latest
-    name: Generate
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Export Gerbers from manually routed pcb
-        if: always()
-        uses: ./.github/actions/export-gerbers
-        with:
-          pcb_file: routed_pcb/board.kicad_pro
-          gerbers_dir: output/gerbers/board
-      - name: Persist output
-        uses: actions/upload-artifact@v2
-        with:
-          name: gerbers
-          path: output/gerbers
