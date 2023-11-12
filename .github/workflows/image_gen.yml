@@ -1,6 +1,10 @@
 on: 
   workflow_dispatch:
   workflow_call:
+    secrets:
+      PAT:
+        description: 'personal access token'
+        required: true
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   PAT: ${{ secrets.PAT }}
