@@ -31,7 +31,6 @@ jobs:
           commit_message: "updated pcb images"
           skip_fetch: false
       - name: Persist output
-        w
         uses: actions/upload-artifact@v3
         with:
           name: images
