@@ -6,7 +6,7 @@ on:
       - '.github/actions/render/action.yml'
   workflow_dispatch:
 
-name: Generate
+name: Generate From Manual Route
 jobs:
   Image:
     runs-on: ubuntu-latest
@@ -28,6 +28,13 @@ jobs:
           file_pattern: "images/board-back.png images/board-front.png"
           commit_message: "updated pcb images"
           skip_fetch: false
+      - name: Persist output
+        uses: actions/upload-artifact@v3
+        with:
+          name: images
+          path: |
+            images/board-back.png
+            images/board-front.png
   Gerber:
     runs-on: ubuntu-latest
     name: Generate_gerbers
@@ -38,7 +45,7 @@ jobs:
       - name: generate gerbers
         run: kikit fab jlcpcb --no-drc routed_pcb/board.kicad_pcb output/
       - name: Persist output
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: gerbers
           path: output/gerber/*
