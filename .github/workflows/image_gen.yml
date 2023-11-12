@@ -12,11 +12,11 @@ jobs:
     name: Generate_images
     permissions:
       contents: write
+    secrets:
+      PAT: ${{ secrets.PAT }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        secrets:
-          PAT: ${{ secrets.PAT }}
         token: ${{ secrets.PAT }}
       - name: plot images
         uses: ./.github/actions/render
