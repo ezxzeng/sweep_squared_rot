@@ -49,5 +49,18 @@ A 5x3 split keyboard with 3 thumb keys.
 - this design does not support LEDs or displays
 - pads for gateron low profile hotswap sockets gets cut off by the holes a little: this may or may not be problematic
 - [samoklava's](https://github.com/soundmonster/samoklava) auto routing does not really work here
-  - neither does the pcb rendering for some reason. Images are generated with Kicad's built in 3d viewer
 - Still being tested, use at your own risk
+
+
+## Rendering and generation
+
+Ergogen:
+```bash
+ergogen -d .
+```
+Get board image renderings:
+```bash
+docker run -it -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style set-white-enig.json routed_pcb/board.kicad_pcb images/board-front.png
+
+docker run -it -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style set-white-enig.json --side back routed_pcb/board.kicad_pcb images/board-back.png
+```
