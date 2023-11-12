@@ -13,8 +13,9 @@ inputs:
 runs:
   using: 'docker'
   image: 'docker://yaqwsx/kikit:v1.3.0-v7'
-  entrypoint: 'pcbdraw'
+  entrypoint: '/bin/sh'
   args:
+    - '-c'
     - |
-      plot --style ${{ inputs.style }} $GITHUB_WORKSPACE/${{ inputs.pcb_file }} $GITHUB_WORKSPACE/${{ inputs.image_base }}-front.png;
-      plot --style ${{ inputs.style }} --side back $GITHUB_WORKSPACE/${{ inputs.pcb_file }} $GITHUB_WORKSPACE/${{ inputs.image_base }}-back.png;
+     pcbdraw plot --style ${{ inputs.style }} $GITHUB_WORKSPACE/${{ inputs.pcb_file }} $GITHUB_WORKSPACE/${{ inputs.image_base }}-front.png;
+     pcbdraw plot --style ${{ inputs.style }} --side back $GITHUB_WORKSPACE/${{ inputs.pcb_file }} $GITHUB_WORKSPACE/${{ inputs.image_base }}-back.png;
