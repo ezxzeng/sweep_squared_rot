@@ -33,12 +33,13 @@ jobs:
           pcb_output_file: output/pcbs/board_routed.kicad_pcb
           ses_file: output/pcbs/board.ses
       - name: Export Gerbers for main PCB
+        if: always()
         uses: ./.github/actions/export-gerbers
         with:
-          pcb_file: output/pcbs/board.kicad_pcb
+          pcb_file: routed_pcb/board.kicad_pro
           gerbers_dir: output/gerbers/board
       - name: Persist output
         uses: actions/upload-artifact@v2
         with:
-          name: samoklava-routed-pcbs-and-gerbers
+          name: routed-pcbs-and-gerbers
           path: output
