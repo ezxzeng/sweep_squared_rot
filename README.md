@@ -60,7 +60,7 @@ ergogen -d .
 ```
 Get board image renderings (also done in the [generation](https://github.com/ezxzeng/sweep_squared_rot/actions/workflows/manual_route.yml) workflow):
 ```bash
-docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style set-white-enig.json routed_pcb/board.kicad_pcb images/board-front.png
+docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json routed_pcb/board.kicad_pcb images/board-front.png
 
-docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style set-white-enig.json --side back routed_pcb/board.kicad_pcb images/board-back.png
+docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json --side back routed_pcb/board.kicad_pcb images/board-back.png
 ```

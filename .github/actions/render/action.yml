@@ -9,7 +9,7 @@ inputs:
     required: true
   style:
     description: 'style json'
-    default: set-white-enig.json
+    default: style.json
 runs:
   using: 'docker'
   image: 'docker://yaqwsx/kikit:v1.3.0-v7'

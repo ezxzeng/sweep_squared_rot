@@ -25,7 +25,7 @@ jobs:
         with:
           pcb_input_file: routed_pcb/board.kicad_pcb
           image_base: images/board
-          style: set-white-enig.json
+          style: style.json
       - name: Commit updated images
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
