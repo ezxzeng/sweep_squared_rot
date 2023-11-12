@@ -3,38 +3,12 @@ on:
     paths:
       - 'routed_pcb/board.kicad_pcb'
       - '.github/workflows/manual_route.yml'
-      - '.github/actions/render/action.yml'
   workflow_dispatch:
 
 name: Generate From Manual Route
 jobs:
   Image:
-    runs-on: ubuntu-latest
-    name: Generate_images
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: plot images
-        uses: ./.github/actions/render
-        with:
-          pcb_input_file: routed_pcb/board.kicad_pcb
-          image_base: images/board
-          style: set-white-enig.json
-      - name: Commit updated images
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          file_pattern: "images/board-back.png images/board-front.png"
-          commit_message: "updated pcb images"
-          skip_fetch: false
-      - name: Persist output
-        uses: actions/upload-artifact@v3
-        with:
-          name: images
-          path: |
-            images/board-back.png
-            images/board-front.png
+    uses: ./.github/workflows/image_gen.yml
   Gerber:
     runs-on: ubuntu-latest
     name: Generate_gerbers
