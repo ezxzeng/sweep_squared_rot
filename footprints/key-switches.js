@@ -17,9 +17,11 @@ module.exports = {
         designator: 'SW',
 
         mx_spacing: true,
+        millmax_diameter: 1.6, // {YMD: 1.6, other_aliexpress: 2(?), actual_millmax: 1.5}
 
         mx: true,
         mx_hotswap: false,
+        mx_millmax: false,
         mx_reverse: false,
         mx_pth: false,
         mx_rev_pad: false,
@@ -27,12 +29,14 @@ module.exports = {
 
         choc: false,
         choc_hotswap: false,
+        choc_millmax: false,
         choc_reverse: false,
         choc_pth: false,
         choc_neg_y: true,
 
         gateron_lp: false,
         gateron_lp_hotswap: false,
+        gateron_lp_millmax: false,
         gateron_lp_reverse: false,
         gateron_lp_pth: false,
         gateron_lp_rev_pad: false,
@@ -149,10 +153,12 @@ module.exports = {
                 (pad ${pad_1} smd rect (at ${def_pos}5.842 ${y_neg_sign}5.08 ${p.rot}) (size 2.55 2.5) (layers ${def_side}.Cu ${def_side}.Paste ${def_side}.Mask) ${pad_1_net})
                 `
             } else {
+                const drill_d = p.mx_millmax ? p.millmax_diameter : 1.4986
+                const copper_d = p.mx_millmax ? p.millmax_diameter + 0.8 : 2.286
                 return `
                 ${''/* pins */}
-                (pad ${pad_2} thru_hole circle (at ${def_pos}2.54 ${y_neg_sign}5.08) (size 2.286 2.286) (drill 1.4986) (layers *.Cu *.Mask) ${pad_2_net})
-                (pad ${pad_1} thru_hole circle (at ${def_neg}3.81 ${y_neg_sign}2.54) (size 2.286 2.286) (drill 1.4986) (layers *.Cu *.Mask) ${pad_1_net})
+                (pad ${pad_2} thru_hole circle (at ${def_pos}2.54 ${y_neg_sign}5.08) (size ${copper_d} ${copper_d}) (drill ${drill_d}) (layers *.Cu *.Mask) ${pad_2_net})
+                (pad ${pad_1} thru_hole circle (at ${def_neg}3.81 ${y_neg_sign}2.54) (size ${copper_d} ${copper_d}) (drill ${drill_d}) (layers *.Cu *.Mask) ${pad_1_net})
                 `
             }
         }
@@ -184,10 +190,12 @@ module.exports = {
                 (pad 2 smd rect (at ${def_pos}8.275 ${y_neg_sign}3.75 ${p.rot}) (size 2.6 2.6) (layers ${def_side}.Cu ${def_side}.Paste ${def_side}.Mask)  ${p.to.str})
                 `
             } else {
+                const drill_d = p.choc_millmax ? p.millmax_diameter : 1.27
+                const copper_d = p.choc_millmax ? p.millmax_diameter + 0.8 : 2.032
                 return `
                 ${''/* pins */}
-                (pad 1 thru_hole circle (at ${def_pos}0 ${y_neg_sign}5.9) (size 2.032 2.032) (drill 1.27) (layers *.Cu *.Mask) ${p.from.str})
-                (pad 2 thru_hole circle (at ${def_pos}5 ${y_neg_sign}3.8) (size 2.032 2.032) (drill 1.27) (layers *.Cu *.Mask) ${p.to.str})
+                (pad 1 thru_hole circle (at ${def_pos}0 ${y_neg_sign}5.9) (size ${copper_d} ${copper_d}) (drill ${drill_d}) (layers *.Cu *.Mask) ${p.from.str})
+                (pad 2 thru_hole circle (at ${def_pos}5 ${y_neg_sign}3.8) (size ${copper_d} ${copper_d}) (drill ${drill_d}) (layers *.Cu *.Mask) ${p.to.str})
                 `
             }
         }
@@ -230,10 +238,12 @@ module.exports = {
                 (pad ${pad_1} smd rect (at ${def_pos}6.275 ${y_neg_sign}5.75 ${p.rot}) (size 2.55 2.5) (layers ${def_side}.Cu ${def_side}.Paste ${def_side}.Mask) ${pad_1_net})
                 `
             } else {
+                const drill_d = p.gateron_lp_millmax ? p.millmax_diameter : 1.27
+                const copper_d = p.gateron_lp_millmax ? p.millmax_diameter + 0.8 : 2.032
                 return `
                 ${''/* pins */}
-                (pad ${pad_2} thru_hole circle (at ${def_pos}2.6 ${y_neg_sign}5.75) (size 2.286 2.286) (drill 1.4986) (layers *.Cu *.Mask) ${pad_2_net})
-                (pad ${pad_1} thru_hole circle (at ${def_neg}4.4 ${y_neg_sign}4.70) (size 2.286 2.286) (drill 1.4986) (layers *.Cu *.Mask) ${pad_1_net})
+                (pad ${pad_2} thru_hole circle (at ${def_pos}2.6 ${y_neg_sign}5.75) (size ${copper_d} ${copper_d}) (drill ${drill_d}) (layers *.Cu *.Mask) ${pad_2_net})
+                (pad ${pad_1} thru_hole circle (at ${def_neg}4.4 ${y_neg_sign}4.70) (size ${copper_d} ${copper_d}) (drill ${drill_d}) (layers *.Cu *.Mask) ${pad_1_net})
                 `
             }
         }
