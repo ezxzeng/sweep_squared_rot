@@ -186,8 +186,8 @@ module.exports = {
             } else {
                 return `
                 ${''/* pins */}
-                (pad 1 thru_hole circle (at ${def_pos}5 ${y_neg_sign}3.8) (size 2.032 2.032) (drill 1.27) (layers *.Cu *.Mask) ${p.from.str})
-                (pad 2 thru_hole circle (at ${def_pos}0 ${y_neg_sign}5.9) (size 2.032 2.032) (drill 1.27) (layers *.Cu *.Mask) ${p.to.str})
+                (pad 1 thru_hole circle (at ${def_pos}0 ${y_neg_sign}5.9) (size 2.032 2.032) (drill 1.27) (layers *.Cu *.Mask) ${p.from.str})
+                (pad 2 thru_hole circle (at ${def_pos}5 ${y_neg_sign}3.8) (size 2.032 2.032) (drill 1.27) (layers *.Cu *.Mask) ${p.to.str})
                 `
             }
         }
