@@ -438,7 +438,7 @@ pcbs:
           shift: [center_x-13.2, center_y - 38]
           rotate: 90
         params:
-          layer: "F.SilkS"
+          side: "F"
           text: "wireless"
           h_size: .5
           v_size: .5
@@ -448,7 +448,7 @@ pcbs:
           shift: [center_x-12, center_y - 38.4]
           rotate: 90
         params:
-          layer: "F.SilkS"
+          side: "F"
           text: "口"
           h_size: 1.5
           v_size: 2.2
@@ -458,7 +458,7 @@ pcbs:
           shift: [center_x-13.2, center_y - 42]
           rotate: 90
         params:
-          layer: "B.SilkS"
+          side: "B"
           text: "wired"
           h_size: .5
           v_size: .5
@@ -468,7 +468,7 @@ pcbs:
           shift: [center_x-12, center_y - 41.5]
           rotate: 90
         params:
-          layer: "B.SilkS"
+          side: "B"
           text: "口"
           h_size: 1.5
           v_size: 2.2
