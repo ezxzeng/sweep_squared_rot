@@ -40,18 +40,18 @@ points:
       rotate: -12
       columns:
         pinky:
-          rows.bottom:
-            rotate: -90
-          rows.home:
-            rotate: 90
-            shift: [-1kx, -1kx]
+          # rows.bottom:
+          #   rotate: -90
+          # rows.home:
+          #   rotate: 90
+          #   shift: [-1kx, -1kx]
         ring.key:
           stagger: 0.25kx
         middle.key.stagger: 0.25kx
         index.key.stagger: -0.25kx
         inner:
           key.stagger: -0.15kx
-          rows.top.rotate: 90
+          rows.top.rotate: 180
       rows:
         bottom.padding: kx
         home.padding: kx
@@ -345,11 +345,12 @@ pcbs:
         params:
           from: "{{name}}"
           to: GND
-          mx: true
-          mx_hotswap: true
-          mx_reverse: true
-          mx_pth: false
-          mx_rev_pad: true
+          mx: false
+          mx_spacing: true
+          choc: true
+          choc_hotswap: false
+          choc_reverse: true
+          choc_millmax: true
           gateron_lp: true
           gateron_lp_hotswap: true
           gateron_lp_reverse: true
