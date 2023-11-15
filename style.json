@@ -1,5 +1,6 @@
 {
-    "board": "#808080",
+    "_board": "#808080",
+    "board": "#e6e6e6",
     "copper": "#e6e6e6",
     "silk": "#0b1013",
     "pads": "#cfb96e",
