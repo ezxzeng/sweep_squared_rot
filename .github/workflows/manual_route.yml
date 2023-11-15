@@ -7,10 +7,10 @@ on:
 
 name: Generate From Manual Route
 jobs:
-  Image:
-    uses: ./.github/workflows/image_gen.yml
-    secrets:
-      PAT: ${{ secrets.PAT }}
+  # Image:
+  #   uses: ./.github/workflows/image_gen.yml
+  #   secrets:
+  #     PAT: ${{ secrets.PAT }}
   Gerber:
     runs-on: ubuntu-latest
     name: Generate_gerbers
