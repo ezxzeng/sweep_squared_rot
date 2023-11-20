@@ -329,7 +329,7 @@ pcbs:
   top_plate:
     outlines:
       edge:
-        outline: pcb_outline
+        outline: _pcb_outline
         layer: Edge.Cuts
     footprints:
       jlc_order_number:
@@ -340,7 +340,7 @@ pcbs:
   bottom_plate:
     outlines:
       edge:
-        outline: pcb_outline
+        outline: _pcb_outline
         layer: Edge.Cuts
   board:
     outlines:
@@ -376,7 +376,7 @@ pcbs:
           gateron_lp_neg_y: true
           keycaps: true
       mcu:
-        what: promicro
+        what: promicro-pretty
         where:
           shift: [center_x - 32.8, center_y - 32.25]
           rotate: 90
