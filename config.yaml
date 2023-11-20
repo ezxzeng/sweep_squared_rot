@@ -6,31 +6,31 @@ units:
   kx: u
   ky: u
   # Padding Variables
-  px: kx + 2
-  py: ky + 2
-  center_x: 112.65
-  center_y: -127
+  px: kx + 1
+  py: ky + 1
+  center_x: 118.34
+  center_y: -121
   # Defaults to M2 Screws
   screwSize: 1.5
   standoffSize: 2.5
   # 65.9, 81
-  mounting_1_x: center_x-46.75
-  mounting_1_y: center_y+46 
+  mounting_1_x: center_x-47
+  mounting_1_y: center_y+47 
   # 146.65, 81
   mounting_2_x: center_x+34 
-  mounting_2_y: center_y+46 
+  mounting_2_y: center_y+47 
   # 158.5, 146 mm
-  mounting_3_x: center_x+45.85
+  mounting_3_x: center_x+47
   mounting_3_y: center_y-19
   # 125.65, 172
   mounting_4_x: center_x+13
-  mounting_4_y: center_y-45 
+  mounting_4_y: center_y-47 
   # 102.65, 142
-  mounting_5_x: center_x-10
-  mounting_5_y: center_y-15 
+  mounting_5_x: center_x-15
+  mounting_5_y: center_y-14
   # 65.9, 138
-  mounting_6_x: center_x-46.75
-  mounting_6_y: center_y-11.0 
+  mounting_6_x: center_x-47
+  mounting_6_y: center_y-47
 points:
   zones:
     matrix:
@@ -39,14 +39,14 @@ points:
       key:
         padding: 1ky
         spread: 1kx
-      rotate: -15
+      rotate: -12
       columns:
         pinky:
           rows.bottom:
-            rotate: 90
-          rows.home:
             rotate: -90
-            shift: [1kx, -1kx]
+          rows.home:
+            rotate: 90
+            shift: [-1kx, -1kx]
         ring.key:
           stagger: 0.25kx
         middle.key.stagger: 0.25kx
@@ -60,93 +60,99 @@ points:
         top.padding: kx
     thumb:
       anchor:
-        ref: matrix_index_bottom
-        shift: [0.6kx, -1.2kx]
-        rotate: -10
+        ref: matrix_middle_bottom
+        shift: [0.4kx, -1.35kx]
       columns:
+        inner:
+          key.name: thumb_inner
         tucky:
-          key.name: thumb_tucky
+          key:
+            name: thumb_tucky
+            stagger: -2
+            splay: -14
+            shift: [2, 0]
         reachy:
           key.spread: kx
           key.splay: -14
           key.stagger: 3
           key.origin: [-0.5kx, -0.5kx]
-          key.shift: [1, 0]
+          key.shift: [3, 0]
           key.rotate: 90
           key.width: 1.5kx
           key.name: thumb_reachy
-    helper:
-      key.skip: true
-      anchor.shift: [100 - 1.25kx, -100 -3.25kx]
-      columns:
-        pinky:
-        ring:
-        middle:
-        index:
-        inner:
-      rows:
-        thumb:
-        bottom:
-          shift: [0, kx]
-        home:
-        top:
 outlines:
-  thumb:
+  _thumb:
     - what: rectangle
       where: thumb_reachy
       bound: true
       size: [1.5kx, ky]
-  keys:
+  _padded_thumb:
+    - what: rectangle
+      where: thumb_reachy
+      bound: true
+      size: [1.5px, py]
+  _keys:
     - what: rectangle
       where: true
-      size: [kx, kx]
-  limits:
+      size: [kx, ky]
+  _padded_keys:
+    - what: rectangle
+      where: true
+      size: [px, py]
+  key_outline:
+    - name: _keys
+    - +_thumb
+  _expanded_key_outline:
+    - name: _padded_keys
+    - +_padded_thumb
+  _limits:
     - what: rectangle
       size: [100, 100]
       adjust.shift: [center_x, center_y]
   combo:
-    - name: limits
+    - name: _limits
     - operation: stack
-      name: keys
+      name: _keys
     - operation: stack
-      name: thumb
-  pcb_outline:
+      name: _thumb
+  _pcb_outline:
     - what: polygon
       points:
         - shift: [center_x-50, center_y+50]
         - shift: [100, 0]
         - shift: [0, -100]
-        - shift: [-40, 0]
-        - shift: [-15, 15]
-        - shift: [-45, 0]
+        # - shift: [-40, 0]
+        # - shift: [-15, 15]
+        # - shift: [-45, 0]
+        - shift: [-100, 0]
       fillet: 2
   pcb_outline_combo:
-    - name: pcb_outline
+    - name: _pcb_outline
     - operation: stack
-      name: keys
+      name: _keys
     - operation: stack
-      name: limits
-  case_outline:
+      name: _limits
+  _case_outline:
     - what: polygon
       points:
-        - shift: [center_x-57, center_y+56]
-        - shift: [115, 0]
-        - shift: [0, -115]
+        - shift: [center_x-54, center_y+53]
+        - shift: [112, 0]
+        - shift: [0, -112]
         - shift: [-40, 0]
-        - shift: [-23.5, 23.5]
-        - shift: [-51.5, 0]
+        - shift: [-9, 9]
+        - shift: [-63, 0]
       fillet: 2
-  case_outline_xl:
+  _case_outline_xl:
     - what: polygon
       points:
-        - shift: [center_x-59, center_y+58]
-        - shift: [119, 0]
-        - shift: [0, -119]
+        - shift: [center_x-56, center_y+55]
+        - shift: [116, 0]
+        - shift: [0, -116]
         - shift: [-43, 0]
-        - shift: [-23.5, 23.5]
-        - shift: [-52.5, 0]
+        - shift: [-9, 9]
+        - shift: [-64, 0]
       fillet: 2
-  mounting:
+  _mounting:
     - what: circle
       where.shift: [mounting_1_x, mounting_1_y]
       radius: screwSize
@@ -165,7 +171,7 @@ outlines:
     - what: circle
       where.shift: [mounting_6_x, mounting_6_y]
       radius: screwSize
-  standoff:
+  _standoff:
     - what: circle
       where.shift: [mounting_1_x, mounting_1_y]
       radius: standoffSize
@@ -184,28 +190,116 @@ outlines:
     - what: circle
       where.shift: [mounting_6_x, mounting_6_y]
       radius: standoffSize
+  control_area:
+    - what: polygon
+      points:
+        - shift: [center_x-44, center_y-50]
+        - shift: [0, 38]
+        - shift: [22.5, 0]
+        - shift: [9, -9]
+        - shift: [0, -12]
+        - shift: [10, -2]
+        - shift: [5, -5]
+        - shift: [0, -10]
+      fillet: 1
+  plate:
+    - what: polygon
+      where: true
+      points:
+        - shift: [-6.005, 7.8]
+        - shift: [3.5, 0]
+        - shift: [0, -0.815]
+        - shift: [5.01, 0]
+        - shift: [0, 0.815]
+        - shift: [3.5, 0]
+        - shift: [0, -0.815]
+        - shift: [0.98, 0]
+        - shift: [0, -0.98]
+        - shift: [0.815, 0]
+        - shift: [0, -3.5]
+        - shift: [-0.815, 0]
+        - shift: [0, -5.01]
+        - shift: [0.815, 0]
+        - shift: [0, -3.5]
+        - shift: [-0.815, 0]
+        - shift: [0, -0.98]
+        - shift: [-0.98, 0]
+        - shift: [0, -0.815]
+        - shift: [-3.5, 0]
+        - shift: [0, 0.815]
+        - shift: [-5.01, 0]
+        - shift: [0, -0.815]
+        - shift: [-3.5, 0]
+        - shift: [0, 0.815]
+        - shift: [-0.98, 0]
+        - shift: [0, 0.98]
+        - shift: [-0.815, 0]
+        - shift: [0, 3.5]
+        - shift: [0.815, 0]
+        - shift: [0, 5.01]
+        - shift: [-0.815, 0]
+        - shift: [0, 3.5]
+        - shift: [0.815, 0]
+        - shift: [0, 0.98]
+        - shift: [0.98, 0]
+  plate_supports:
+    - what: rectangle
+      where: true
+      size: [15, 15]
+  
   case_outline_combo:
-    - name: case_outline
-    - ^case_outline_xl
-    - ^pcb_outline
-    - ^keys
-    - ^thumb
-    - ^mounting
-    - ^standoff
+    - name: _case_outline
+    - ^_case_outline_xl
+    - ^_pcb_outline
+    - ^_expanded_key_outline
+    - ^_mounting
+    - ^_standoff
+    - ^control_area
+
+  case_outline_bottom:
+    - name: _case_outline
+    - ^_case_outline_xl
+    - ^_mounting
+    - ^_standoff
+  case_outline_top:
+    - name: _case_outline
+    - ^_case_outline_xl
+    # - ^_pcb_outline
+    - ^_expanded_key_outline
+    - ^_mounting
+    - ^_standoff
+    - ^control_area
+  plate_combo:
+    - name: plate
+    - ^_case_outline
+    - ^_standoff
+    - -control_area
+    - ^_expanded_key_outline
+  plate_combo_nokeys:
+    - name: plate
+    - ^_case_outline
+    - ^_standoff
+    - -control_area
+  plate_supports_combo:
+    - name: plate_supports
+    - ^_case_outline
+    - -_standoff
+    - -control_area
 cases:
-  bottom:
-    - name: case_outline
+  _outline:
+    - name: _case_outline
       extrude: 1
-  xlBottom:
-    - name: case_outline_xl
+  _xl_outline:
+    - name: _case_outline_xl
       extrude: 1
+  # assuming 0.6mm pcb, this goes to half a pcb
   _outerWall:
-    - name: case_outline_xl
-      extrude: 5.6
+    - name: _case_outline_xl
+      extrude: 5.3
   _innerWall:
-    - name: case_outline
-      extrude: 5.6
-  wall:
+    - name: _case_outline
+      extrude: 5.3
+  _wall:
     - what: case
       name: _outerWall
       operation: add
@@ -213,12 +307,12 @@ cases:
       name: _innerWall
       operation: subtract
   _holes:
-    - name: mounting
+    - name: _mounting
       extrude: 4
   _standoffs:
-    - name: standoff
+    - name: _standoff
       extrude: 4
-  case:
+  bottom_case:
     - what: case
       name: _standoffs
       operation: add
@@ -226,10 +320,10 @@ cases:
       name: _holes
       operation: subtract
     - what: case
-      name: xlBottom
+      name: _xl_outline
       operation: add
     - what: case
-      name: wall
+      name: _wall
       operation: add
 pcbs:
   top_plate:
@@ -249,9 +343,19 @@ pcbs:
         outline: pcb_outline
         layer: Edge.Cuts
   board:
-    outlines.edge:
-      outline: pcb_outline
-      layer: Edge.Cuts
+    outlines:
+      edge:
+        outline: _pcb_outline
+        layer: Edge.Cuts
+      control_area:
+        outline: control_area
+        layer: Dwgs.User
+      case_outline:
+        outline: _case_outline
+        layer: Dwgs.User
+      case_outline_xl:
+        outline: _case_outline_xl
+        layer: Dwgs.User
     footprints:
       keys:
         what: key-switches
@@ -262,16 +366,20 @@ pcbs:
           mx: true
           mx_hotswap: true
           mx_reverse: true
-          mx_pth: true
-          choc: true
-          choc_hotswap: true
-          choc_reverse: true
-          choc_pth: true
+          mx_pth: false
+          mx_rev_pad: true
+          gateron_lp: true
+          gateron_lp_hotswap: true
+          gateron_lp_reverse: true
+          gateron_lp_pth: false
+          gateron_lp_rev_pad: true
+          gateron_lp_neg_y: true
           keycaps: true
       mcu:
         what: promicro
         where:
-          - shift: [center_x - 34.8, center_y - 25]
+          shift: [center_x - 32.8, center_y - 32.25]
+          rotate: 90
         params:
           P7: matrix_pinky_top
           P18: matrix_ring_top
@@ -290,6 +398,7 @@ pcbs:
           P6: matrix_inner_bottom
           P8: thumb_tucky
           P9: thumb_reachy
+          RAW: RAW
       trrs:
         what: trrs
         where:
@@ -299,30 +408,92 @@ pcbs:
           symmetric: true
           A: GND
           B: GND
-          C: P0
+          C: trrs_data
           D: VCC
       reset:
         what: reset_button
         where:
-          shift: [center_x - 4, center_y - 26]
-          rotate: -90
+          shift: [center_x - 8, center_y - 48]
+          rotate: 180
         params:
           from: GND
           to: RST
-      slider:
+      reset2:
+        what: b3u1000p
+        where:
+          shift: [center_x - 8, center_y - 48]
+        params:
+          r2: GND
+          r1: RST
+      slider_power:
         what: slider_threeway
         where:
-          shift: [center_x - 11, center_y - 33.5]
+          shift: [center_x - 18.15, center_y - 48.25]
           rotate: 180
         params:
           from: Bplus
-          left: RAW
-          right: ''
+          left: ''
+          right: RAW
           reversible: true
+          # if the switch is verticle, reverse the left and right nets on back side
+          # or to just make the wiring easier
+          reverse_left_right: true 
+      slider_wireless:
+        what: slider_threeway
+        where:
+          shift: [center_x-10, center_y - 40]
+          rotate: -90
+        params:
+          from: P0
+          left: thumb_inner
+          right: trrs_data
+          reversible: true
+          # if the switch is verticle, reverse the left and right nets on back side
+          reverse_left_right: true 
+      wireless_marker:
+        what: text
+        where:
+          shift: [center_x-13.2, center_y - 38]
+          rotate: 90
+        params:
+          side: "F"
+          text: "wireless"
+          h_size: .5
+          v_size: .5
+      wireless_box:
+        what: text
+        where:
+          shift: [center_x-12, center_y - 38.4]
+          rotate: 90
+        params:
+          side: "F"
+          text: "口"
+          h_size: 1.5
+          v_size: 2.2
+      wired_marker:
+        what: text
+        where:
+          shift: [center_x-13.2, center_y - 42]
+          rotate: 90
+        params:
+          side: "B"
+          text: "wired"
+          h_size: .5
+          v_size: .5
+      wired_box:
+        what: text
+        where:
+          shift: [center_x-12, center_y - 41.5]
+          rotate: 90
+        params:
+          side: "B"
+          text: "口"
+          h_size: 1.5
+          v_size: 2.2
       jst:
         what: jstph_reversible
         where:
-          shift: [center_x-11, center_y-28.5]
+          shift: [center_x-18, center_y-42]
           rotate: 180
         params:
           pos: Bplus

@@ -1,0 +1,12 @@
+SRC_PATTERN="routed_pcb/board.kicad_pcb\|.githooks/pre-commit\|style.json"
+if git diff --cached --name-only | grep --quiet "$SRC_PATTERN"
+then
+    docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json routed_pcb/board.kicad_pcb images/board-front.png
+    docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json --side back routed_pcb/board.kicad_pcb images/board-back.png
+
+    # docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json output/pcbs/board.kicad_pcb images/board-front.png
+    # docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json --side back output/pcbs/board.kicad_pcb images/board-back.png
+
+    git add images/board-front.png
+    git add images/board-back.png
+fi

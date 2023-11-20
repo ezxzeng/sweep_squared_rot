@@ -1,0 +1,41 @@
+on: 
+  workflow_dispatch:
+  workflow_call:
+    secrets:
+      PAT:
+        description: 'personal access token'
+        required: true
+env:
+  PAT: ${{ secrets.PAT }}
+
+name: Generate Images and commit them
+jobs:
+  Image:
+    runs-on: ubuntu-latest
+    name: Generate_images
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT }}
+      - name: plot images
+        uses: ./.github/actions/render
+        with:
+          pcb_input_file: routed_pcb/board.kicad_pcb
+          image_base: images/board
+          style: style.json
+      - name: Commit updated images
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          file_pattern: "images/board-back.png images/board-front.png"
+          commit_message: "updated pcb images"
+          skip_fetch: false
+      - name: Persist output
+        uses: actions/upload-artifact@v3
+        with:
+          name: images
+          path: |
+            images/board-back.png
+            images/board-front.png
