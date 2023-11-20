@@ -29,6 +29,12 @@ units:
   # 65.9, 138
   mounting_6_x: center_x-47
   mounting_6_y: center_y-47
+
+  mounting_7_x: center_x+55
+  mounting_7_y: center_y+47
+
+  mounting_8_x: center_x+55
+  mounting_8_y: center_y-56
 points:
   zones:
     matrix:
@@ -169,6 +175,12 @@ outlines:
     - what: circle
       where.shift: [mounting_6_x, mounting_6_y]
       radius: screwSize
+    - what: circle
+      where.shift: [mounting_7_x, mounting_7_y]
+      radius: screwSize
+    - what: circle
+      where.shift: [mounting_8_x, mounting_8_y]
+      radius: screwSize
   _standoff:
     - what: circle
       where.shift: [mounting_1_x, mounting_1_y]
@@ -187,6 +199,12 @@ outlines:
       radius: standoffSize
     - what: circle
       where.shift: [mounting_6_x, mounting_6_y]
+      radius: standoffSize
+    - what: circle
+      where.shift: [mounting_7_x, mounting_7_y]
+      radius: standoffSize
+    - what: circle
+      where.shift: [mounting_8_x, mounting_8_y]
       radius: standoffSize
   control_area:
     - what: polygon
