@@ -49,18 +49,18 @@ points:
       rotate: -12
       columns:
         pinky:
-          # rows.bottom:
-          #   rotate: -90
-          # rows.home:
-          #   rotate: 90
-          #   shift: [-1kx, -1kx]
+          rows.bottom:
+            rotate: -90
+          rows.home:
+            rotate: 90
+            shift: [-1kx, -1kx]
         ring.key:
           stagger: 0.25kx
         middle.key.stagger: 0.25kx
         index.key.stagger: -0.25kx
         inner:
           key.stagger: -0.15kx
-          rows.top.rotate: 180
+          rows.top.rotate: 90
       rows:
         bottom.padding: kx
         home.padding: kx
@@ -278,11 +278,11 @@ outlines:
   plate:
     - what: rectangle
       where: true
-      size: [14, 14]
+      size: [14.1, 14.1]
   plate_supports:
     - what: rectangle
       where: true
-      size: [8, 16]
+      size: [16, 13]
   _switch_extension_supp:
     - what: rectangle
       where.shift: [center_x - 18.15, center_y - 50.4]
@@ -425,15 +425,15 @@ cases:
       shift: [0, 0, 5]
       operation: subtract
     - name: plate_supports
-      extrude: 3.75
-      shift: [0, 0, 5.25]
+      extrude: 1.3
+      shift: [0, 0, 7.7]
       operation: subtract
     - name: plate
-      extrude: 4.5
-      shift: [0, 0, 4.5]
+      extrude: 2.3
+      shift: [0, 0, 6.7]
       operation: subtract
     - name: _expanded_key_outline
-      extrude: 4.5
+      extrude: 6.7
       operation: subtract
     - name: control_area
       extrude: 8
