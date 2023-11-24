@@ -13,7 +13,7 @@ country.
 
 left | right | outline
 -|-|-
-![left](images/board-front.png) | ![right](images/board-back.png) | ![outline](images/case_outline_top.svg)
+![left](images/board-front.png) | ![right](images/board-back.png) | ![outline](images/display_all_combo.svg)
 
 A 5x3 split keyboard with 3 thumb keys. 
 
@@ -56,8 +56,14 @@ A 5x3 split keyboard with 3 thumb keys.
 
 Ergogen:
 ```bash
-ergogen -d .
+ergogen .
 ```
+
+Case:
+```bash
+for i in output/cases/*.jscad; do npx @jscad/cli@1 "$i" -of stla; done
+```
+
 Get board image renderings (also done in the pre-commit hook):
 ```bash
 docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json routed_pcb/board.kicad_pcb images/board-front.png
