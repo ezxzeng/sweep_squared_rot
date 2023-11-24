@@ -32,11 +32,11 @@ units:
   mounting_6_x: center_x-47
   mounting_6_y: center_y-47
 
-  mounting_7_x: center_x+55
-  mounting_7_y: center_y+47
+  mounting_7_x: center_x+53.25
+  mounting_7_y: center_y+50.25
 
-  mounting_8_x: center_x+55
-  mounting_8_y: center_y-56
+  mounting_8_x: center_x+53
+  mounting_8_y: center_y-52
 
 points:
   zones:
@@ -85,33 +85,17 @@ points:
           key.origin: [-0.5kx, -0.5kx]
           key.shift: [3, 0]
           key.rotate: 90
-          key.width: 1.5kx
+          # key.width: 1.5kx
           key.name: thumb_reachy
 outlines:
-  _thumb:
-    - what: rectangle
-      where: thumb_reachy
-      bound: true
-      size: [1.5kx, ky]
-  _padded_thumb:
-    - what: rectangle
-      where: thumb_reachy
-      bound: true
-      size: [1.5px, py]
-  _keys:
+  key_outline:
     - what: rectangle
       where: true
       size: [kx, ky]
-  _padded_keys:
+  _expanded_key_outline:
     - what: rectangle
       where: true
       size: [px, py]
-  key_outline:
-    - name: _keys
-    - +_thumb
-  _expanded_key_outline:
-    - name: _padded_keys
-    - +_padded_thumb
   _limits:
     - what: rectangle
       size: [100, 100]
@@ -119,9 +103,7 @@ outlines:
   combo:
     - name: _limits
     - operation: stack
-      name: _keys
-    - operation: stack
-      name: _thumb
+      name: key_outline
   _pcb_outline:
     - what: polygon
       points:
@@ -136,28 +118,28 @@ outlines:
   pcb_outline_combo:
     - name: _pcb_outline
     - operation: stack
-      name: _keys
+      name: key_outline
     - operation: stack
       name: _limits
   _case_outline:
     - what: polygon
       points:
         - shift: [center_x-54, center_y+53]
-        - shift: [112, 0]
-        - shift: [0, -112.2]
-        - shift: [-40, 0]
-        - shift: [-9, 9]
-        - shift: [-63, 0]
+        - shift: [110, 0]
+        - shift: [0, -108.2]
+        - shift: [-20, 0]
+        - shift: [-5, 5]
+        - shift: [-85, 0]
       fillet: 2
   _case_outline_xl:
     - what: polygon
       points:
         - shift: [center_x-56, center_y+55]
-        - shift: [116, 0]
-        - shift: [0, -116.2]
-        - shift: [-43, 0]
-        - shift: [-9, 9]
-        - shift: [-64, 0]
+        - shift: [114, 0]
+        - shift: [0, -112.2]
+        - shift: [-23, 0]
+        - shift: [-5, 5]
+        - shift: [-86, 0]
       fillet: 2
   _mounting:
     - what: circle
@@ -420,10 +402,6 @@ cases:
       extrude: 4
       shift: [0, 0, 5]
       operation: subtract
-    - name: _mounting_case_only
-      extrude: 4
-      shift: [0, 0, 5]
-      operation: subtract
     - name: plate_supports
       extrude: 1.3
       shift: [0, 0, 7.7]
@@ -457,10 +435,31 @@ cases:
     - name: _switch_backsupport_tall
       extrude: 9
       operation: add
+    - name: _standoff_bottom_wall_case_only
+      extrude: 1.6
+      shift: [0, 0, 9]
+      operation: add
+    - name: _mounting_case_only
+      extrude: 4
+      shift: [0, 0, 6.6]
+      operation: subtract
+  _top_case_wall_subtract:
+    - name: _case_outline_xl
+      extrude: 0.8
+      shift: [0, 0, 9.8]
+      operation: add
+    - name: _case_outline
+      extrude: 0.8
+      shift: [0, 0, 9.8]
+      operation: subtract
   top_case:
     - what: case
       name: _top_case
       shift: [-center_x, -center_y, 0]
+    - what: case
+      name: _top_case_wall_subtract
+      shift: [-center_x, -center_y, 0]
+      operation: subtract
       
   _bottom_case:
     - name: _case_outline_xl
@@ -474,19 +473,19 @@ cases:
       extrude: 3.5
       operation: add
     - name: _standoff_bottom_wall_case_only
-      extrude: 5.1
+      extrude: 3.5
       operation: add
     - name: _standoff
       extrude: 2
       operation: subtract
     - name: _standoff_case_only
-      extrude: 4.6
+      extrude: 2
       operation: subtract
     - name: _mounting_tight
       extrude: 3.5
       operation: subtract
     - name: _mounting_tight_case_only
-      extrude: 5.1
+      extrude: 3.5
       operation: subtract
     - name: _reset_hole
       extrude: 1.5
@@ -494,24 +493,11 @@ cases:
     - name: _wireless_switch_hole
       extrude: 1.5
       operation: subtract
-  _bottom_case_wall_subtract:
-    - name: _case_outline_xl
-      extrude: 0.8
-      shift: [0, 0, 4.3]
-      operation: add
-    - name: _case_outline
-      extrude: 0.8
-      shift: [0, 0, 4.3]
-      operation: subtract
   bottom_case:
     - what: case
       name: _bottom_case
       shift: [-center_x, -center_y, 0]
       operation: add
-    - what: case
-      name: _bottom_case_wall_subtract
-      shift: [-center_x, -center_y, 0]
-      operation: subtract
 
   _switch_extension:
     - name: _switch_extension_main
