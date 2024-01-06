@@ -285,17 +285,17 @@ outlines:
       size: [8, 16]
   _switch_extension_supp:
     - what: rectangle
-      where.shift: [center_x - 18.15, center_y - 50.4]
+      where.shift: [center_x - 18.15, center_y - 50.6]
       size: [13, 0.8]
   _switch_extension_main:
     - what: rectangle
-      where.shift: [center_x - 18.15, center_y - 51.3]
+      where.shift: [center_x - 18.15, center_y - 51.5]
       size: [3.2, 2.4]
     - +_switch_extension_supp
   _switch_extension_cuttout:
     - what: rectangle
       where.shift: [center_x - 18.15, center_y - 50.9]
-      size: [1.6, 1.8]
+      size: [1.6, 1.4]
 
   _switch_extension_supp_opening:
     - what: rectangle
@@ -404,7 +404,7 @@ outlines:
     - ^pw_switch_combo
     - ^_usbc_opening
     - ^_reset_hole
-    - ^_wireless_switch_combo
+    # - ^_wireless_switch_combo
     - ^_pcb_outline
     # - ^_usbc_opening_sideview
 cases:
@@ -452,7 +452,7 @@ cases:
       shift: [0, 0, 7.05]
       operation: subtract
     - name: _switch_backsupport
-      extrude: 8
+      extrude: 7.25
       operation: add
     - name: _switch_backsupport_tall
       extrude: 9
@@ -491,9 +491,9 @@ cases:
     - name: _reset_hole
       extrude: 1.5
       operation: subtract
-    - name: _wireless_switch_hole
-      extrude: 1.5
-      operation: subtract
+    #- name: _wireless_switch_hole
+      #extrude: 1.5
+      #operation: subtract
   _bottom_case_wall_subtract:
     - name: _case_outline_xl
       extrude: 0.8
@@ -515,10 +515,10 @@ cases:
 
   _switch_extension:
     - name: _switch_extension_main
-      extrude: 1.8
+      extrude: 2.8
       operation: add
     - name: _switch_extension_cuttout
-      extrude: 1.2
+      extrude: 2.2
       operation: subtract
   switch_extension:
     - what: case
