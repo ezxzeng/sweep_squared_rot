@@ -1,43 +1,3 @@
-# `U` is a predefined unit of measure that means 19.05mm, which is MX spacing
-units:
-  # Proxy Spacing Variables for easy changing to choc/mx
-  kx: u
-  ky: u
-  # Padding Variables
-  px: kx + 1.5
-  py: ky + 1.5
-  center_x: 118.34
-  center_y: -121
-  # Defaults to M2 Screws
-  screwSize: 1.5
-  screwSize_tight: 1
-  standoffSize: 2.5
-  bottom_screwhole_wall: 3.5
-  # 65.9, 81
-  mounting_1_x: center_x-47
-  mounting_1_y: center_y+47 
-  # 146.65, 81
-  mounting_2_x: center_x+34 
-  mounting_2_y: center_y+47 
-  # 158.5, 146 mm
-  mounting_3_x: center_x+47
-  mounting_3_y: center_y-19
-  # 125.65, 172
-  mounting_4_x: center_x+13
-  mounting_4_y: center_y-47 
-  # 102.65, 142
-  mounting_5_x: center_x-15
-  mounting_5_y: center_y-14
-  # 65.9, 138
-  mounting_6_x: center_x-47
-  mounting_6_y: center_y-47
-
-  mounting_7_x: center_x+55
-  mounting_7_y: center_y+47
-
-  mounting_8_x: center_x+55
-  mounting_8_y: center_y-56
-
 points:
   zones:
     matrix:
@@ -85,19 +45,20 @@ points:
           key.origin: [-0.5kx, -0.5kx]
           key.shift: [3, 0]
           key.rotate: 90
-          key.width: 1.5kx
+          key.width: thumb_size * kx
           key.name: thumb_reachy
 outlines:
+  # ==================== keys ====================
   _thumb:
     - what: rectangle
       where: thumb_reachy
       bound: true
-      size: [1.5kx, ky]
+      size: [thumb_size * kx, ky]
   _padded_thumb:
     - what: rectangle
       where: thumb_reachy
       bound: true
-      size: [1.5px, py]
+      size: [thumb_size * px, py]
   _keys:
     - what: rectangle
       where: true
@@ -139,26 +100,38 @@ outlines:
       name: _keys
     - operation: stack
       name: _limits
+  # ==================== case ====================
   _case_outline:
     - what: polygon
       points:
-        - shift: [center_x-54, center_y+53]
-        - shift: [112, 0]
-        - shift: [0, -112.2]
-        - shift: [-40, 0]
-        - shift: [-9, 9]
-        - shift: [-63, 0]
+        - shift: [center_x-50-case_left_padding, center_y+50+case_top_padding]
+        - shift: [100+case_left_padding+case_right_padding, 0]
+        - shift: [0, -100-case_top_padding-case_bottom_padding-case_to_pcb]
+        - shift: [-1*case_thumb_traverse, 0]
+        - shift: [-1*case_bottom_padding, case_bottom_padding]
+        - shift: [case_thumb_traverse+case_bottom_padding-case_left_padding-case_right_padding-100, 0]
+      fillet: 2
+  _case_outline_xs:
+    - what: polygon
+      points:
+        - shift: [center_x-50-case_left_padding+case_to_pcb, center_y+50+case_top_padding-case_to_pcb]
+        - shift: [100+case_left_padding+case_right_padding-(case_to_pcb*2), 0]
+        - shift: [0, -100-case_top_padding-case_bottom_padding+case_to_pcb]
+        - shift: [-1*case_thumb_traverse+(case_to_pcb*1.5), 0]
+        - shift: [-1*case_bottom_padding, case_bottom_padding]
+        - shift: [case_thumb_traverse+case_bottom_padding-case_left_padding-case_right_padding-100+(case_to_pcb*0.5), 0]
       fillet: 2
   _case_outline_xl:
     - what: polygon
       points:
-        - shift: [center_x-56, center_y+55]
-        - shift: [116, 0]
-        - shift: [0, -116.2]
-        - shift: [-43, 0]
-        - shift: [-9, 9]
-        - shift: [-64, 0]
+        - shift: [center_x-50-case_left_padding-wall_thickness, center_y+50+case_top_padding+wall_thickness]
+        - shift: [100+case_left_padding+case_right_padding+(wall_thickness*2), 0]
+        - shift: [0, -100-case_top_padding-case_bottom_padding-case_to_pcb-(wall_thickness*2)]
+        - shift: [-1*case_thumb_traverse-(wall_thickness*1.5), 0]
+        - shift: [-1*case_bottom_padding, case_bottom_padding]
+        - shift: [case_thumb_traverse+case_bottom_padding-case_left_padding-case_right_padding-100-(wall_thickness*0.5), 0]
       fillet: 2
+  # ==================== mounting ====================
   _mounting:
     - what: circle
       where.shift: [mounting_1_x, mounting_1_y]
@@ -263,6 +236,7 @@ outlines:
     - what: circle
       where.shift: [mounting_8_x, mounting_8_y]
       radius: bottom_screwhole_wall
+  # ==================== control_area ====================
   control_area:
     - what: polygon
       points:
@@ -275,45 +249,47 @@ outlines:
         - shift: [5, -5]
         - shift: [0, -11.7]
       fillet: 1
+  # ==================== plate ====================
   plate:
     - what: rectangle
       where: true
-      size: [14, 14]
+      size: [plate_switch_hole_x, plate_switch_hole_y]
   plate_supports:
     - what: rectangle
       where: true
-      size: [8, 16]
+      size: [plate_support_x, plate_support_y]
+  # ==================== power switch extension ====================
   _switch_extension_supp:
     - what: rectangle
-      where.shift: [center_x - 18.15, center_y - 50.6]
-      size: [13, 0.8]
+      where.shift: [center_x + power_x, center_y-50-case_to_pcb-(ps_ext_supp_thickness/2)]
+      size: [(ps_ext_supp_x*2)+ps_outer_x, ps_ext_supp_thickness]
   _switch_extension_main:
     - what: rectangle
-      where.shift: [center_x - 18.15, center_y - 51.5]
-      size: [3.2, 2.4]
+      where.shift: [center_x + power_x, center_y-50-case_to_pcb-((ps_outer_y_from_wall+wall_thickness)/2)]
+      size: [ps_outer_x, ps_outer_y_from_wall+wall_thickness]
     - +_switch_extension_supp
   _switch_extension_cuttout:
     - what: rectangle
-      where.shift: [center_x - 18.15, center_y - 50.9]
-      size: [1.6, 1.4]
+      where.shift: [center_x + power_x, center_y-50-case_to_pcb-(ps_ext_cuttout_y/2)]
+      size: [ps_ext_cuttout_x, ps_ext_cuttout_y]
 
   _switch_extension_supp_opening:
     - what: rectangle
-      where.shift: [center_x - 18.15, center_y - 50.7]
-      size: [18, 1]
+      where.shift: [center_x + power_x, center_y-50-case_to_pcb-((ps_ext_supp_thickness+ps_ext_supp_to_wall)/2)]
+      size: [((ps_ext_supp_x+ps_ext_supp_x_padding)*2)+ps_outer_x, ps_ext_supp_thickness+ps_ext_supp_to_wall]
   _switch_opening:
     - what: rectangle
-      where.shift: [center_x - 18.15, center_y - 51.2]
-      size: [6.5, 2]
+      where.shift: [center_x + power_x, center_y-50-case_to_pcb-(wall_thickness/2)]
+      size: [ps_hole_x, wall_thickness]
     - +_switch_extension_supp_opening
   _switch_backsupport:
     - what: rectangle
-      where.shift: [center_x - 18.15, center_y - (50.2-0.4)]
-      size: [8, 0.8]
+      where.shift: [center_x+power_x, center_y-50-case_to_pcb-(ps_backsupp_thickness/2)]
+      size: [ps_backsupp_low_x, ps_backsupp_thickness]
   _switch_backsupport_tall:
     - what: rectangle
-      where.shift: [center_x - 5.15, center_y - (50.2-0.4)]
-      size: [18, 0.8]
+      where.shift: [center_x+power_x+(ps_backsupp_low_x/2)+(ps_backsupp_tall_x/2), center_y-50-case_to_pcb-(ps_backsupp_thickness/2)]
+      size: [ps_backsupp_tall_x, ps_backsupp_thickness]
   pw_switch_combo:
     - name: _switch_extension_main
     - ^_switch_opening
@@ -321,49 +297,24 @@ outlines:
     - ^_switch_backsupport
     - ^_switch_backsupport_tall
 
+  # ==================== openings ====================
   _usbc_opening:
     - what: rectangle
-      where.shift: [center_x - 32.8, center_y - 51.2]
-      size: [10, 2]
+      where.shift: [center_x + mcu_x, center_y-50-case_to_pcb-(wall_thickness/2)]
+      size: [usbc_x, wall_thickness]
   _usbc_opening_sideview:
     - what: rectangle
-      where.shift: [center_x - 32.8, center_y - 50.2]
-      size: [10, 3.75]
+      where.shift: [center_x + mcu_x, center_y-50-case_to_pcb]
+      size: [usbc_x, usbc_z]
       fillet: 1
 
   _reset_hole:
     - what: rectangle
-      where.shift: [center_x - 8, center_y - 48]
-      size: [8.5, 2.7]
-      fillet: 1.349
-  _wireless_switch_hole:
-    - what: rectangle
-      where.shift: [center_x-(10-2.75), center_y - 40]
-      size: [2.6,6.5]
-      fillet: 0.25
-  _wireless_switch:
-    - what: rectangle
-      where.shift: [center_x-(10-2.75), center_y - 40]
-      size: [2.4, 3.2]
-      fillet: 0.25
-  _wireless_switch_fit:
-    - what: rectangle
-      where.shift: [center_x-(10-2.75+0.4), center_y - 40]
-      size: [1.6, 1.6]
-  _wireless_switch_supp:
-    - what: rectangle
-      where.shift: [center_x-(10-2.75+1.3), center_y - 40]
-      size: [5, 9]
-  _wireless_switch_supp_cutout:
-    - what: rectangle
-      where.shift: [center_x-(10-2.75+.8), center_y - 40]
-      size: [4, 12]
-  _wireless_switch_combo:
-    - name: _wireless_switch
-    - ^_wireless_switch_fit
-    - ^_wireless_switch_supp
-    - ^_wireless_switch_hole
-    #- ^_wireless_switch_supp_cutout
+      where.shift: [center_x+reset_x, center_y+reset_y]
+      size: [reset_hole_x, reset_hole_y]
+      fillet: reset_hole_fillet
+
+  # ==================== combos ====================
   
   case_outline_combo:
     - name: _case_outline
@@ -392,6 +343,7 @@ outlines:
     - name: plate_supports
     - ^_case_outline
     - ^_case_outline_xl
+    - ^_case_outline_xs
     - ^_mounting
     - ^_standoff
     - ^_standoff_bottom_wall
@@ -408,122 +360,160 @@ outlines:
     - ^_pcb_outline
     # - ^_usbc_opening_sideview
 cases:
-  _top_case:
-    - name: _case_outline_xl
-      extrude: 9.8
-      operation: add
-    - name: _case_outline
-      extrude: 0.8
-      shift: [0, 0, 9]
-      operation: subtract
+  _top_mounting:
     - name: _mounting
-      extrude: 4
-      shift: [0, 0, 5]
-      operation: subtract
+      extrude: mounting_top_extrude
+      shift: [0, 0, top_case_height-mounting_top_extrude]
+      operation: add
     - name: _mounting_case_only
-      extrude: 4
-      shift: [0, 0, 5]
-      operation: subtract
-    - name: plate_supports
-      extrude: 3.75
-      shift: [0, 0, 5.25]
-      operation: subtract
-    - name: plate
-      extrude: 4.5
-      shift: [0, 0, 4.5]
-      operation: subtract
-    - name: _expanded_key_outline
-      extrude: 4.5
-      operation: subtract
+      extrude: mounting_top_extrude+pcb_thickness
+      shift: [0, 0, top_case_height-mounting_top_extrude]
+      operation: add
+  _top_mounting_standoffs:
+    - name: _standoff_bottom_wall_case_only
+      extrude: pcb_thickness
+      shift: [0, 0, top_case_height]
+      operation: add
+  _control_area:
     - name: control_area
-      extrude: 8
-      shift: [0, 0, 1]
-      operation: subtract
-#    - name: _usbc_opening
-#      extrude: 3.75
-#      shift: [0, 0, 2.05]
+      extrude: top_case_height-control_area_ceil_thickness
+      shift: [0, 0, control_area_ceil_thickness]
+      operation: add
+  _plate:
+    - name: plate_supports
+      extrude: plate_z - plate_thickness
+      shift: [0, 0, top_case_height-plate_z+plate_thickness]
+      operation: add
+    - name: plate
+      extrude: plate_z
+      shift: [0, 0, top_case_height-plate_z]
+      operation: add
+    - name: _expanded_key_outline
+      extrude: top_case_height-plate_z
+      operation: add
+  _usbc_opening:
     - name: _usbc_opening_sideview
       extrude: 2
-      shift: [0, 0, 2.05+(3.75/2)]
+      shift: [0, 0, wall_thickness+case_to_pcb+(usbc_z/2)]
       rotate: [90, 0, 0]
-      operation: subtract
+      operation: add
+  _switch_opening:
     - name: _switch_opening
-      extrude: 2.75
-      shift: [0, 0, 7.05]
-      operation: subtract
+      extrude: ps_hole_z
+      shift: [0, 0, top_case_height+(pcb_thickness/2)-ps_hole_z]
+      operation: add
+  _switch_support:
     - name: _switch_backsupport
-      extrude: 7.25
+      extrude: top_case_height-ps_backsupp_low_z_subtract
       operation: add
     - name: _switch_backsupport_tall
-      extrude: 9
+      extrude: top_case_height
       operation: add
+  _top_walls:
+    - name: _case_outline_xl
+      extrude: top_case_height+(pcb_thickness/2)
+      operation: add
+    - name: _case_outline
+      extrude: pcb_thickness/2
+      shift: [0, 0, top_case_height]
+      operation: subtract
+  _top_case:
+    - what: case
+      name: _top_walls
+    - what: case
+      name: _top_mounting_standoffs
+    - what: case
+      name: _top_mounting
+      operation: subtract
+    - what: case
+      name: _control_area
+      operation: subtract
+    - what: case
+      name: _plate
+      operation: subtract
+    - what: case
+      name: _usbc_opening
+      operation: subtract
+    - what: case
+      name: _switch_opening
+      operation: subtract
+    - what: case
+      name: _switch_support
+      operation: subtract
+  _top_case_wall_subtract:
+    - name: _case_outline_xl
+      extrude: pcb_thickness/2
+      shift: [0, 0, top_case_height+(pcb_thickness/2)]
+      operation: add
+    - name: _case_outline_xs
+      extrude: pcb_thickness/2
+      shift: [0, 0, top_case_height+(pcb_thickness/2)]
+      operation: subtract
   top_case:
     - what: case
       name: _top_case
       shift: [-center_x, -center_y, 0]
-      
-  _bottom_case:
-    - name: _case_outline_xl
-      extrude: 4.3
-      operation: add
-    - name: _case_outline
-      extrude: 2.8
-      shift: [0, 0, 1.5]
+    - what: case
+      name: _top_case_wall_subtract
+      shift: [-center_x, -center_y, 0]
       operation: subtract
+      
+  _bottom_standoffs:
     - name: _standoff_bottom_wall
-      extrude: 3.5
+      extrude: bottom_case_height
       operation: add
     - name: _standoff_bottom_wall_case_only
-      extrude: 5.1
+      extrude: bottom_case_height
       operation: add
     - name: _standoff
-      extrude: 2
+      extrude: bottom_case_height-bottom_standoff_thickness
       operation: subtract
     - name: _standoff_case_only
-      extrude: 4.6
+      extrude: bottom_case_height-bottom_standoff_thickness
       operation: subtract
     - name: _mounting_tight
-      extrude: 3.5
+      extrude: bottom_case_height
       operation: subtract
     - name: _mounting_tight_case_only
-      extrude: 5.1
+      extrude: bottom_case_height
       operation: subtract
+  _reset_hole:
     - name: _reset_hole
-      extrude: 1.5
-      operation: subtract
-    #- name: _wireless_switch_hole
-      #extrude: 1.5
-      #operation: subtract
-  _bottom_case_wall_subtract:
+      extrude: bottom_thickness
+      operation: add
+  _bottom_case_walls:
     - name: _case_outline_xl
-      extrude: 0.8
-      shift: [0, 0, 4.3]
+      extrude: bottom_case_height+(pcb_thickness/2)
       operation: add
     - name: _case_outline
-      extrude: 0.8
-      shift: [0, 0, 4.3]
+      extrude: bottom_case_height+(pcb_thickness/2)-bottom_thickness
+      shift: [0, 0, bottom_thickness]
+      operation: subtract
+  _bottom_case:
+    - what: case
+      name: _bottom_case_walls
+    - what: case
+      name: _bottom_standoffs
+      operation: add
+    - what: case
+      name: _reset_hole
       operation: subtract
   bottom_case:
     - what: case
       name: _bottom_case
       shift: [-center_x, -center_y, 0]
-      operation: add
-    - what: case
-      name: _bottom_case_wall_subtract
-      shift: [-center_x, -center_y, 0]
-      operation: subtract
 
   _switch_extension:
     - name: _switch_extension_main
-      extrude: 2.8
+      extrude: ps_hole_z
       operation: add
     - name: _switch_extension_cuttout
-      extrude: 2.2
+      extrude: ps_cuttout_z
       operation: subtract
   switch_extension:
     - what: case
       name: _switch_extension
-      shift: [-center_x + 18.15, -center_y+50.9, 0]
+      shift: [-center_x - power_x, -center_y+50+case_to_pcb+(ps_ext_cuttout_y/2), 0]
 pcbs:
   board:
     outlines:
@@ -546,22 +536,22 @@ pcbs:
         params:
           from: "{{name}}"
           to: GND
-          mx: true
-          mx_hotswap: true
-          mx_reverse: true
-          mx_pth: false
-          mx_rev_pad: true
-          gateron_lp: true
-          gateron_lp_hotswap: true
-          gateron_lp_reverse: true
-          gateron_lp_pth: false
-          gateron_lp_rev_pad: true
-          gateron_lp_neg_y: true
+          mx: mx
+          mx_hotswap: mx_hotswap
+          mx_reverse: mx_reverse
+          mx_pth: mx_pth
+          mx_rev_pad: mx_rev_pad
+          gateron_lp: gateron_lp
+          gateron_lp_hotswap: gateron_lp_hotswap
+          gateron_lp_reverse: gateron_lp_reverse
+          gateron_lp_pth: gateron_lp_pth
+          gateron_lp_rev_pad: gateron_lp_rev_pad
+          gateron_lp_neg_y: gateron_lp_neg_y
           keycaps: true
       mcu:
         what: promicro-pretty
         where:
-          shift: [center_x - 32.8, center_y - 32.25]
+          shift: [center_x + mcu_x, center_y + mcu_y]
           rotate: 90
         params:
           P7: matrix_pinky_top
@@ -585,7 +575,7 @@ pcbs:
       trrs:
         what: trrs
         where:
-          - shift: [center_x + 48, center_y + 51.7]
+          - shift: [center_x + trrs_x, center_y + trrs_y]
         params:
           reverse: true
           symmetric: true
@@ -596,7 +586,7 @@ pcbs:
       reset:
         what: reset_button
         where:
-          shift: [center_x - 8, center_y - 48]
+          shift: [center_x + reset_x, center_y + reset_y]
           rotate: 180
         params:
           from: GND
@@ -604,14 +594,14 @@ pcbs:
       reset2:
         what: b3u1000p
         where:
-          shift: [center_x - 8, center_y - 48]
+          shift: [center_x + reset_x, center_y + reset_y]
         params:
           r2: GND
           r1: RST
       slider_power:
         what: slider_threeway
         where:
-          shift: [center_x - 18.15, center_y - 48.25]
+          shift: [center_x + power_x, center_y + power_y]
           rotate: 180
         params:
           from: Bplus
@@ -624,7 +614,7 @@ pcbs:
       slider_wireless:
         what: slider_threeway
         where:
-          shift: [center_x-10, center_y - 40]
+          shift: [center_x + wireless_x, center_y + wireless_y]
           rotate: -90
         params:
           from: P0
@@ -636,7 +626,7 @@ pcbs:
       wireless_marker:
         what: text
         where:
-          shift: [center_x-13.2, center_y - 38]
+          shift: [center_x + wireless_x-3.2, center_y + wireless_y+2]
           rotate: 90
         params:
           side: "F"
@@ -646,7 +636,7 @@ pcbs:
       wireless_box:
         what: text
         where:
-          shift: [center_x-12, center_y - 38.4]
+          shift: [center_x + wireless_x-2, center_y + wireless_y+1.6]
           rotate: 90
         params:
           side: "F"
@@ -656,7 +646,7 @@ pcbs:
       wired_marker:
         what: text
         where:
-          shift: [center_x-13.2, center_y - 42]
+          shift: [center_x + wireless_x-3.2, center_y + wireless_y-2]
           rotate: 90
         params:
           side: "B"
@@ -666,7 +656,7 @@ pcbs:
       wired_box:
         what: text
         where:
-          shift: [center_x-12, center_y - 41.5]
+          shift: [center_x + wireless_x-2, center_y + wireless_y-1.5]
           rotate: 90
         params:
           side: "B"
@@ -676,7 +666,7 @@ pcbs:
       jst:
         what: jstph_reversible
         where:
-          shift: [center_x-18, center_y-42]
+          shift: [center_x+jst_x, center_y+jst_y]
           rotate: 180
         params:
           pos: Bplus

@@ -1,0 +1,128 @@
+# `U` is a predefined unit of measure that means 19.05mm, which is MX spacing
+units:
+  # Proxy Spacing Variables for easy changing to choc/mx
+  kx: u
+  ky: u
+  # Padding Variables
+  px: kx + 1.5
+  py: ky + 1.5
+  center_x: 118.34
+  center_y: -121
+
+  thumb_size: 1.5 # U
+
+  # ==================== case outline ====================
+  # assume 100x100 pcb
+  case_left_padding: 4
+  case_top_padding: 3
+  case_right_padding: 8
+  case_bottom_padding: 9
+  case_thumb_traverse: 40 # amount of x mm before 45 degree angle up to meet the pcb
+  case_to_pcb: 0.2 # tolorance
+  wall_thickness: 2
+
+  # ==================== mounting ====================
+  # Defaults to M2 Screws
+  screwSize: 1.5
+  screwSize_tight: 1
+  standoffSize: 2.5
+  bottom_screwhole_wall: 3.5
+  # 65.9, 81
+  mounting_1_x: center_x-47
+  mounting_1_y: center_y+47 
+  # 146.65, 81
+  mounting_2_x: center_x+34 
+  mounting_2_y: center_y+47 
+  # 158.5, 146 mm
+  mounting_3_x: center_x+47
+  mounting_3_y: center_y-19
+  # 125.65, 172
+  mounting_4_x: center_x+13
+  mounting_4_y: center_y-47 
+  # 102.65, 142
+  mounting_5_x: center_x-15
+  mounting_5_y: center_y-14
+  # 65.9, 138
+  mounting_6_x: center_x-47
+  mounting_6_y: center_y-47
+
+  mounting_7_x: center_x+55
+  mounting_7_y: center_y+47
+
+  mounting_8_x: center_x+55
+  mounting_8_y: center_y-56
+
+  # ==================== object locations ====================
+  mcu_x: -32.8
+  mcu_y: -32.25
+
+  trrs_x: 48
+  trrs_y: 51.7
+
+  reset_x: -8
+  reset_y: -48
+
+  power_x: -18.15
+  power_y: -48.25
+
+  wireless_x: -10
+  wireless_y: -40
+
+  jst_x: -18
+  jst_y: -42
+
+  # ==================== power switch extension ====================
+  ps_ext_supp_x: 4.9 # x length of switch extension supports on each side
+  ps_ext_supp_x_padding: 2.5 # x length to subtract from the wall on each side to allow the switch to move
+  ps_ext_supp_thickness: 0.8 # thickness of switch extension supports on each side
+  ps_ext_supp_to_wall: 0.2
+  ps_hole_x: 6.5 # length of hole to leave in case wall
+  ps_ext_cuttout_x: 1.6
+  ps_ext_cuttout_y: 1.4
+  ps_outer_x: 3.2
+  ps_outer_y_from_wall: 0.5 # distance from switch support to inner wall
+  ps_backsupp_thickness: 0.8
+  ps_backsupp_low_x: 8 # length of shorter back support, centered on switch
+  ps_backsupp_low_z_subtract: 2.55
+  ps_backsupp_tall_x: 18 # length of tall back support, right of lower
+  ps_hole_z: 2.75
+  ps_cuttout_z: 2.2 # measured from bottom of pcb
+
+  # ==================== case ====================
+  mounting_top_extrude: 5
+  top_case_height: 9
+  pcb_thickness: 1.6
+  bottom_case_height: 3.5 # height to touching pcb, not counting outer wall
+  bottom_standoff_thickness: 1.5
+  bottom_thickness: 1.5
+
+  # control area
+  control_area_ceil_thickness: 1
+
+  # plate variables
+  plate_switch_hole_x: 14
+  plate_switch_hole_y: 14
+  plate_support_x: 8
+  plate_support_y: 16
+  plate_z: 4.5 # from pcb to top of plate
+  plate_thickness: 0.75 # from plate to plate support
+
+  # openings
+  usbc_x: 10
+  usbc_z: 3.75
+  reset_hole_x: 8.5
+  reset_hole_y: 2.7
+  reset_hole_fillet: 1.349
+
+  # ==================== switches ====================
+  mx: true
+  mx_hotswap: true
+  mx_reverse: true
+  mx_pth: false
+  mx_rev_pad: true
+  gateron_lp: true
+  gateron_lp_hotswap: true
+  gateron_lp_reverse: true
+  gateron_lp_pth: false
+  gateron_lp_rev_pad: true
+  gateron_lp_neg_y: true
