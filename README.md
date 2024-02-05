@@ -54,17 +54,29 @@ A 5x3 split keyboard with 3 thumb keys.
 
 ## Rendering and generation
 
-Ergogen:
+### Generate config:
+```bash
+python generate_config.py
+```
+Alternatively, edit the units of base_units.yaml with files from the `unit_diffs` folder.
+
+For example, to generate a case compatible with gateron low profile keyboards and a 1u thumb key instead of 1.5u:
+```bash
+python generate_config.py unit_diffs/1u_thumb.yaml unit_diffs/gateron_lp_case.yaml 
+```
+
+
+### Ergogen:
 ```bash
 ergogen .
 ```
 
-Case:
+### Case:
 ```bash
 for i in output/cases/*.jscad; do npx @jscad/cli@1 "$i" -of stla; done
 ```
 
-Get board image renderings (also done in the pre-commit hook):
+### Get board image renderings:
 ```bash
 docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json routed_pcb/board.kicad_pcb images/board-front.png
 
