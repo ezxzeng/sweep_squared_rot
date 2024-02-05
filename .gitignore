@@ -1,5 +1,6 @@
 node_modules
 output
+config.yaml
 *.DS_Store
 other_pcbs
 routed_pcb/*-backups

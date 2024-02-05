@@ -27,7 +27,7 @@ def main(update_configs):
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('changes', nargs='+', 
+    parser.add_argument('changes', nargs='*', 
                         help='path to yaml with all changes to apply to base_config.yaml')
     args = parser.parse_args()
     return args.changes
