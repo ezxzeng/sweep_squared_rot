@@ -16,33 +16,33 @@ module.exports = {
     params: {
         designator: 'SW',
 
-        mx_spacing: true,
+        mx_spacing: 1,
         millmax_diameter: 1.6, // {YMD: 1.6, other_aliexpress: 2(?), actual_millmax: 1.5}
 
-        mx: true,
-        mx_hotswap: false,
-        mx_millmax: false,
-        mx_reverse: false,
-        mx_pth: false,
-        mx_rev_pad: false,
-        mx_neg_y: false,
+        mx: 1,
+        mx_hotswap: 0,
+        mx_millmax: 0,
+        mx_reverse: 0,
+        mx_pth: 0,
+        mx_rev_pad: 0,
+        mx_neg_y: 0,
 
-        choc: false,
-        choc_hotswap: false,
-        choc_millmax: false,
-        choc_reverse: false,
-        choc_pth: false,
-        choc_neg_y: true,
+        choc: 0,
+        choc_hotswap: 0,
+        choc_millmax: 0,
+        choc_reverse: 0,
+        choc_pth: 0,
+        choc_neg_y: 1,
 
-        gateron_lp: false,
-        gateron_lp_hotswap: false,
-        gateron_lp_millmax: false,
-        gateron_lp_reverse: false,
-        gateron_lp_pth: false,
-        gateron_lp_rev_pad: false,
-        gateron_lp_neg_y: true,
+        gateron_lp: 0,
+        gateron_lp_hotswap: 0,
+        gateron_lp_millmax: 0,
+        gateron_lp_reverse: 0,
+        gateron_lp_pth: 0,
+        gateron_lp_rev_pad: 0,
+        gateron_lp_neg_y: 1,
 
-        keycaps: false,
+        keycaps: 0,
         from: undefined,
         to: undefined
     },
@@ -164,7 +164,7 @@ module.exports = {
         }
 
         function choc_pins(def_neg, def_pos, def_side) {
-            const y_neg_sign = p.choc_pins_neg_y ? '-' : ''
+            const y_neg_sign = p.choc_neg_y ? '-' : ''
             if (p.choc_pth){
                 return `
                 ${'' /* holes */}

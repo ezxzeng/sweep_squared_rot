@@ -532,18 +532,26 @@ pcbs:
         params:
           from: "{{name}}"
           to: GND
-          mx: mx
-          mx_hotswap: mx_hotswap
-          mx_reverse: mx_reverse
-          mx_pth: mx_pth
-          mx_rev_pad: mx_rev_pad
-          gateron_lp: gateron_lp
+          mx_spacing:         mx_spacing
+          millmax_diameter:   millmax_diameter
+          mx:                 mx
+          mx_hotswap:         mx_hotswap
+          mx_reverse:         mx_reverse
+          mx_pth:             mx_pth
+          mx_rev_pad:         mx_rev_pad
+          gateron_lp:         gateron_lp
           gateron_lp_hotswap: gateron_lp_hotswap
           gateron_lp_reverse: gateron_lp_reverse
-          gateron_lp_pth: gateron_lp_pth
+          gateron_lp_pth:     gateron_lp_pth
           gateron_lp_rev_pad: gateron_lp_rev_pad
-          gateron_lp_neg_y: gateron_lp_neg_y
-          keycaps: true
+          gateron_lp_neg_y:   gateron_lp_neg_y
+          choc:               choc
+          choc_hotswap:       choc_hotswap
+          choc_millmax:       choc_millmax
+          choc_reverse:       choc_reverse
+          choc_pth:           choc_pth
+          choc_neg_y:         choc_neg_y
+          keycaps:            keycaps
       mcu:
         what: promicro-pretty
         where:

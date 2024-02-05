@@ -115,14 +115,23 @@ units:
   reset_hole_fillet: 1.349
 
   # ==================== switches ====================
-  mx: true
-  mx_hotswap: true
-  mx_reverse: true
-  mx_pth: false
-  mx_rev_pad: true
-  gateron_lp: true
-  gateron_lp_hotswap: true
-  gateron_lp_reverse: true
-  gateron_lp_pth: false
-  gateron_lp_rev_pad: true
-  gateron_lp_neg_y: true
+  mx_spacing: 1
+  millmax_diameter: 1.6
+  mx: 1
+  mx_hotswap: 1
+  mx_reverse: 1
+  mx_pth: 0
+  mx_rev_pad: 1
+  gateron_lp: 1
+  gateron_lp_hotswap: 1
+  gateron_lp_reverse: 1
+  gateron_lp_pth: 0
+  gateron_lp_rev_pad: 1
+  gateron_lp_neg_y: 1
+  choc: 0
+  choc_hotswap: 0
+  choc_millmax: 0
+  choc_reverse: 0
+  choc_pth: 0
+  choc_neg_y: 1
+  keycaps: 1
