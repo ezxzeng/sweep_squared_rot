@@ -458,7 +458,24 @@ cases:
       shift: [-center_x, -center_y, 0]
       operation: subtract
       
-  _bottom_standoffs:
+  _reset_hole:
+    - name: _reset_hole
+      extrude: bottom_thickness
+      operation: add
+  _bottom_case_walls:
+    - name: _case_outline_xl
+      extrude: bottom_case_height+(pcb_thickness/2)
+      operation: add
+    - name: _case_outline
+      extrude: bottom_case_height+(pcb_thickness/2)-bottom_thickness
+      shift: [0, 0, bottom_thickness]
+      operation: subtract
+  _bottom_case:
+    - what: case
+      name: _bottom_case_walls
+    - what: case
+      name: _reset_hole
+      operation: subtract
     - name: _standoff_bottom_wall
       extrude: bottom_case_height
       operation: add
@@ -476,27 +493,6 @@ cases:
       operation: subtract
     - name: _mounting_tight_case_only
       extrude: bottom_case_height
-      operation: subtract
-  _reset_hole:
-    - name: _reset_hole
-      extrude: bottom_thickness
-      operation: add
-  _bottom_case_walls:
-    - name: _case_outline_xl
-      extrude: bottom_case_height+(pcb_thickness/2)
-      operation: add
-    - name: _case_outline
-      extrude: bottom_case_height+(pcb_thickness/2)-bottom_thickness
-      shift: [0, 0, bottom_thickness]
-      operation: subtract
-  _bottom_case:
-    - what: case
-      name: _bottom_case_walls
-    - what: case
-      name: _bottom_standoffs
-      operation: add
-    - what: case
-      name: _reset_hole
       operation: subtract
   bottom_case:
     - what: case
