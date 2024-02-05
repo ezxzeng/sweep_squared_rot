@@ -1,0 +1,12 @@
+gateron_lp: 0
+gateron_lp_hotswap: 0
+gateron_lp_reverse: 0
+gateron_lp_pth: 0
+gateron_lp_rev_pad: 0
+gateron_lp_neg_y: 0
+choc: 1
+choc_hotswap: 1
+choc_millmax: 0
+choc_reverse: 1
+choc_pth: 1
+choc_neg_y: 1
