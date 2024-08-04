@@ -135,3 +135,6 @@ units:
   choc_pth: 0
   choc_neg_y: 1
   keycaps: 1
+
+  # ==================== 3d printing ====================
+  layer_height_3dp: 0.2

@@ -282,19 +282,14 @@ outlines:
       where.shift: [center_x + power_x, center_y-50-case_to_pcb-(wall_thickness/2)]
       size: [ps_hole_x, wall_thickness]
     - +_switch_extension_supp_opening
-  _switch_backsupport:
-    - what: rectangle
-      where.shift: [center_x+power_x, center_y-50-case_to_pcb-(ps_backsupp_thickness/2)]
-      size: [ps_backsupp_low_x, ps_backsupp_thickness]
   _switch_backsupport_tall:
     - what: rectangle
-      where.shift: [center_x+power_x+(ps_backsupp_low_x/2)+(ps_backsupp_tall_x/2), center_y-50-case_to_pcb-(ps_backsupp_thickness/2)]
+      where.shift: [center_x+power_x+(ps_backsupp_low_x/2)+(ps_backsupp_tall_x/2), center_y-50-case_to_pcb+(ps_backsupp_thickness/2)]
       size: [ps_backsupp_tall_x, ps_backsupp_thickness]
   pw_switch_combo:
     - name: _switch_extension_main
     - ^_switch_opening
     - ^_switch_extension_cuttout
-    - ^_switch_backsupport
     - ^_switch_backsupport_tall
 
   # ==================== openings ====================
@@ -403,9 +398,6 @@ cases:
       shift: [0, 0, top_case_height+(pcb_thickness/2)-ps_hole_z]
       operation: add
   _switch_support:
-    - name: _switch_backsupport
-      extrude: top_case_height-ps_backsupp_low_z_subtract
-      operation: add
     - name: _switch_backsupport_tall
       extrude: top_case_height
       operation: add
@@ -439,7 +431,7 @@ cases:
       operation: subtract
     - what: case
       name: _switch_support
-      operation: subtract
+      operation: add
   _top_case_wall_subtract:
     - name: _case_outline_xl
       extrude: pcb_thickness/2
@@ -494,9 +486,25 @@ cases:
     - name: _mounting_tight_case_only
       extrude: bottom_case_height
       operation: subtract
+  
+  # add an additional bridging layer so that supports aren't needed when 3d printing
+  # note that this layer needs to be manually removed later
+  _3dp_bridging_bottom:
+    - name: _standoff
+      extrude: layer_height_3dp
+      shift: [0, 0, bottom_case_height-bottom_standoff_thickness]
+      operation: add
+    - name: _standoff_case_only
+      extrude: layer_height_3dp
+      shift: [0, 0, bottom_case_height-bottom_standoff_thickness]
+      operation: add
+
   bottom_case:
     - what: case
       name: _bottom_case
+      shift: [-center_x, -center_y, 0]
+    - what: case
+      name: _3dp_bridging_bottom
       shift: [-center_x, -center_y, 0]
 
   _switch_extension:
