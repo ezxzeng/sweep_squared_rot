@@ -104,22 +104,12 @@ outlines:
   _case_outline:
     - what: polygon
       points:
-        - shift: [center_x-50-case_left_padding, center_y+50+case_top_padding]
-        - shift: [100+case_left_padding+case_right_padding, 0]
-        - shift: [0, -100-case_top_padding-case_bottom_padding-case_to_pcb]
-        - shift: [-1*case_thumb_traverse, 0]
-        - shift: [-1*case_bottom_padding, case_bottom_padding]
-        - shift: [case_thumb_traverse+case_bottom_padding-case_left_padding-case_right_padding-100, 0]
-      fillet: 2
-  _case_outline_xs:
-    - what: polygon
-      points:
-        - shift: [center_x-50-case_left_padding+case_to_pcb, center_y+50+case_top_padding-case_to_pcb]
-        - shift: [100+case_left_padding+case_right_padding-(case_to_pcb*2), 0]
-        - shift: [0, -100-case_top_padding-case_bottom_padding+case_to_pcb]
-        - shift: [-1*case_thumb_traverse+(case_to_pcb*1.5), 0]
-        - shift: [-1*case_bottom_padding, case_bottom_padding]
-        - shift: [case_thumb_traverse+case_bottom_padding-case_left_padding-case_right_padding-100+(case_to_pcb*0.5), 0]
+        - shift: [center_x-50-case_left_padding, center_y+50+case_top_padding] # top left of case
+        - shift: [100+case_left_padding+case_right_padding, 0] # top right of case
+        - shift: [0, -100-case_top_padding-case_bottom_padding-case_to_pcb] # bottom right of case
+        - shift: [-1*case_thumb_traverse, 0] # bottom left of thumb
+        - shift: [-1*case_bottom_padding, case_bottom_padding] # angled up following thumb
+        - shift: [case_thumb_traverse+case_bottom_padding-case_left_padding-case_right_padding-100, 0] # bottom left of case
       fillet: 2
   _case_outline_xl:
     - what: polygon
@@ -243,7 +233,7 @@ outlines:
         - shift: [center_x-44, center_y-50.2]
         - shift: [0, 38.2]
         - shift: [22.5, 0]
-        - shift: [9, -9]
+        - shift: [8, -9]
         - shift: [0, -10.5]
         - shift: [10, -2]
         - shift: [5, -5]
@@ -299,7 +289,7 @@ outlines:
       size: [usbc_x, wall_thickness]
   _usbc_opening_sideview:
     - what: rectangle
-      where.shift: [center_x + mcu_x, center_y-50-case_to_pcb]
+      where.shift: [center_x + mcu_x, center_y-50]
       size: [usbc_x, usbc_z]
       fillet: 1
 
@@ -338,7 +328,6 @@ outlines:
     - name: plate_supports
     - ^_case_outline
     - ^_case_outline_xl
-    - ^_case_outline_xs
     - ^_mounting
     - ^_standoff
     - ^_standoff_bottom_wall
@@ -361,12 +350,12 @@ cases:
       shift: [0, 0, top_case_height-mounting_top_extrude]
       operation: add
     - name: _mounting_case_only
-      extrude: mounting_top_extrude+pcb_thickness
+      extrude: mounting_top_extrude+pcb_thickness/2
       shift: [0, 0, top_case_height-mounting_top_extrude]
       operation: add
   _top_mounting_standoffs:
     - name: _standoff_bottom_wall_case_only
-      extrude: pcb_thickness
+      extrude: pcb_thickness/2
       shift: [0, 0, top_case_height]
       operation: add
   _control_area:
@@ -388,7 +377,7 @@ cases:
       operation: add
   _usbc_opening:
     - name: _usbc_opening_sideview
-      extrude: 2
+      extrude: 3
       shift: [0, 0, wall_thickness+case_to_pcb+(usbc_z/2)]
       rotate: [90, 0, 0]
       operation: add
@@ -437,7 +426,7 @@ cases:
       extrude: pcb_thickness/2
       shift: [0, 0, top_case_height+(pcb_thickness/2)]
       operation: add
-    - name: _case_outline_xs
+    - name: _case_outline
       extrude: pcb_thickness/2
       shift: [0, 0, top_case_height+(pcb_thickness/2)]
       operation: subtract
@@ -472,7 +461,7 @@ cases:
       extrude: bottom_case_height
       operation: add
     - name: _standoff_bottom_wall_case_only
-      extrude: bottom_case_height
+      extrude: bottom_case_height + pcb_thickness/2
       operation: add
     - name: _standoff
       extrude: bottom_case_height-bottom_standoff_thickness
@@ -484,7 +473,7 @@ cases:
       extrude: bottom_case_height
       operation: subtract
     - name: _mounting_tight_case_only
-      extrude: bottom_case_height
+      extrude: bottom_case_height + pcb_thickness/2
       operation: subtract
   
   # add an additional bridging layer so that supports aren't needed when 3d printing

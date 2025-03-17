@@ -4,8 +4,8 @@ units:
   kx: u
   ky: u
   # Padding Variables
-  px: kx + 1.5
-  py: ky + 1.5
+  px: kx + 1.2
+  py: ky + 1.2
   center_x: 118.34
   center_y: -121
 
@@ -13,18 +13,18 @@ units:
 
   # ==================== case outline ====================
   # assume 100x100 pcb
-  case_left_padding: 4
-  case_top_padding: 3
+  case_left_padding: 5
+  case_top_padding: 4
   case_right_padding: 8
   case_bottom_padding: 9
   case_thumb_traverse: 40 # amount of x mm before 45 degree angle up to meet the pcb
-  case_to_pcb: 0.2 # tolorance
+  case_to_pcb: 0.3 # tolorance from bottom to switch
   wall_thickness: 2
 
   # ==================== mounting ====================
   # Defaults to M2 Screws
-  screwSize: 1.5
-  screwSize_tight: 1
+  screwSize: 2
+  screwSize_tight: 1.2
   standoffSize: 2.5
   bottom_screwhole_wall: 3.5
   # 65.9, 81
@@ -49,8 +49,8 @@ units:
   mounting_7_x: center_x+55
   mounting_7_y: center_y+47
 
-  mounting_8_x: center_x+55
-  mounting_8_y: center_y-56
+  mounting_8_x: center_x+55.2
+  mounting_8_y: center_y-56.2
 
   # ==================== object locations ====================
   mcu_x: -32.8
@@ -90,7 +90,7 @@ units:
 
   # ==================== case ====================
   mounting_top_extrude: 5
-  top_case_height: 9
+ /
   pcb_thickness: 1.6
   bottom_case_height: 3.5 # height to touching pcb, not counting outer wall
   bottom_standoff_thickness: 1.5
@@ -100,12 +100,12 @@ units:
   control_area_ceil_thickness: 1
 
   # plate variables
-  plate_switch_hole_x: 14
-  plate_switch_hole_y: 14
-  plate_support_x: 8
-  plate_support_y: 16
+  plate_switch_hole_x: 14.5
+  plate_switch_hole_y: 14.5
+  plate_support_x: 8.2
+  plate_support_y: 16.2
   plate_z: 4.5 # from pcb to top of plate
-  plate_thickness: 0.75 # from plate to plate support
+  plate_thickness: 0.6 # from plate to plate support
 
   # openings
   usbc_x: 10
