@@ -1,16 +1,17 @@
 # `U` is a predefined unit of measure that means 19.05mm, which is MX spacing
 units:
   # Proxy Spacing Variables for easy changing to choc/mx
-  kx: u
-  ky: u
+  kx: 19
+  ky: 19
   # Padding Variables
   px: kx + 1.2
   py: ky + 1.2
   center_x: 118.34
   center_y: -121
-
+  
   thumb_size: 1.5 # U
-
+  top_case_height: 9
+  
   # ==================== case outline ====================
   # assume 100x100 pcb
   case_left_padding: 5
@@ -20,7 +21,6 @@ units:
   case_thumb_traverse: 40 # amount of x mm before 45 degree angle up to meet the pcb
   case_to_pcb: 0.3 # tolorance from bottom to switch
   wall_thickness: 2
-
   # ==================== mounting ====================
   # Defaults to M2 Screws
   screwSize: 2
@@ -47,30 +47,29 @@ units:
   mounting_6_y: center_y-47
 
   mounting_7_x: center_x+55
-  mounting_7_y: center_y+47
-
+  mounting_7_y: center_y+47  
   mounting_8_x: center_x+55.2
   mounting_8_y: center_y-56.2
-
+  
   # ==================== object locations ====================
   mcu_x: -32.8
   mcu_y: -32.25
-
+  
   trrs_x: 48
   trrs_y: 51.7
-
+  
   reset_x: -8
   reset_y: -48
-
+  
   power_x: -18.15
   power_y: -48.25
-
+  
   wireless_x: -10
   wireless_y: -40
-
+  
   jst_x: -18
   jst_y: -42
-
+  
   # ==================== power switch extension ====================
   ps_ext_supp_x: 4.9 # x length of switch extension supports on each side
   ps_ext_supp_x_padding: 2.5 # x length to subtract from the wall on each side to allow the switch to move
@@ -87,18 +86,18 @@ units:
   ps_backsupp_tall_x: 18 # length of tall back support, right of lower
   ps_hole_z: 2.75
   ps_cuttout_z: 2.2 # measured from bottom of pcb
-
+  
   # ==================== case ====================
   mounting_top_extrude: 5
- /
+  
   pcb_thickness: 1.6
   bottom_case_height: 3.5 # height to touching pcb, not counting outer wall
   bottom_standoff_thickness: 1.5
   bottom_thickness: 1.5
-
+  
   # control area
   control_area_ceil_thickness: 1
-
+  
   # plate variables
   plate_switch_hole_x: 14.5
   plate_switch_hole_y: 14.5
@@ -106,14 +105,14 @@ units:
   plate_support_y: 16.2
   plate_z: 4.5 # from pcb to top of plate
   plate_thickness: 0.6 # from plate to plate support
-
+  
   # openings
   usbc_x: 10
   usbc_z: 3.75
   reset_hole_x: 8.5
   reset_hole_y: 2.7
   reset_hole_fillet: 1.349
-
+  
   # ==================== switches ====================
   mx_spacing: 1
   millmax_diameter: 1.6
@@ -135,6 +134,7 @@ units:
   choc_pth: 0
   choc_neg_y: 1
   keycaps: 1
-
+  
   # ==================== 3d printing ====================
   layer_height_3dp: 0.2
+  

@@ -83,7 +83,7 @@ outlines:
       name: _keys
     - operation: stack
       name: _thumb
-  _pcb_outline:
+  pcb_outline:
     - what: polygon
       points:
         - shift: [center_x-50, center_y+50]
@@ -95,7 +95,7 @@ outlines:
         - shift: [-100, 0]
       fillet: 2
   pcb_outline_combo:
-    - name: _pcb_outline
+    - name: pcb_outline
     - operation: stack
       name: _keys
     - operation: stack
@@ -304,7 +304,7 @@ outlines:
   case_outline_combo:
     - name: _case_outline
     - ^_case_outline_xl
-    - ^_pcb_outline
+    - ^pcb_outline
     - ^_expanded_key_outline
     - ^_mounting
     - ^_standoff
@@ -319,7 +319,7 @@ outlines:
   case_outline_top:
     - name: _case_outline
     - ^_case_outline_xl
-    # - ^_pcb_outline
+    # - ^pcb_outline
     - ^_expanded_key_outline
     - ^_mounting
     - ^_standoff
@@ -341,7 +341,7 @@ outlines:
     - ^_usbc_opening
     - ^_reset_hole
     # - ^_wireless_switch_combo
-    - ^_pcb_outline
+    - ^pcb_outline
     # - ^_usbc_opening_sideview
 cases:
   _top_mounting:
@@ -511,7 +511,7 @@ pcbs:
   board:
     outlines:
       edge:
-        outline: _pcb_outline
+        outline: pcb_outline
         layer: Edge.Cuts
       control_area:
         outline: control_area
