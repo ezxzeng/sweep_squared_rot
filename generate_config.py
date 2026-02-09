@@ -17,7 +17,7 @@ def main(update_configs):
     
     base_units["units"].update(update_config)
     with open("config.yaml", "w") as f:
-        f.write(yaml.dump(base_units))
+        f.write(yaml.dump(base_units, sort_keys=False))
     with open("base_config.yaml", "r") as f:
         base_config = f.read()
     with open("config.yaml", "a") as f:
