@@ -93,8 +93,8 @@ module.exports = {
         `
 
         const choc_shaft = `
-        ${''/* middle shaft */}
-        (pad "" np_thru_hole circle (at 0 0) (size 3.429 3.429) (drill 3.429) (layers *.Cu *.Mask))
+        ${''/* middle shaft (v2 compatible)*/}
+        (pad "" np_thru_hole circle (at 0 0) (size 5.0 5.0) (drill 5.0) (layers *.Cu *.Mask))
             
         ${''/* stabilizers */}
         (pad "" np_thru_hole circle (at 5.5 0) (size 1.7018 1.7018) (drill 1.7018) (layers *.Cu *.Mask))
