@@ -1,0 +1,3 @@
+[submodule "footprints"]
+	path = footprints
+	url = git@github.com:ezxzeng/ergogen_footprints.git
